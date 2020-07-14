@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
@@ -40,6 +41,20 @@ public class SignUpController extends HttpServlet {
 		LocalDate date= LocalDate.now(); // Java 8 Time API used to get system date and time at a particular instance
 		
 		// Fill your code here
+		User user = new User();
+		user.setEmail(email);
+		user.setPassword(password);
+		
+		UserDAO userdao = new UserDAO();
+		user.setDate(date);
+		int checkUser = 0;
+		try {
+			 checkUser = userdao.signUp(user);
+		} catch (ClassNotFoundException | SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		
 		if(checkUser!=0)
